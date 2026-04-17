@@ -1,0 +1,181 @@
+<div class="bg-image">
+
+
+  <!-- <div class="overlay d-flex justify-content-center align-items-center"> -->
+     <div class="overlay d-flex flex-column justify-content-center align-items-center">
+
+    <h3 class="form-title text-center mb-4">FORMULARIO DE CONTACTO</h3>
+
+
+    <div class="card p-4 shadow form-container">
+
+
+      <!-- Título centrado -->
+      <h3 class="text-center text-custom mb-4">Contacto</h3>
+
+      <div class="row">
+        <div
+          class="col-md-4 d-flex flex-column align-items-start contact-block"
+        >
+          <p><i class="bi bi-envelope"></i> contacto&#64;correo.com</p>
+          <p>
+            <i class="bi bi-geo-alt-fill"></i> Carrera 54 # 4-61 apto 401
+            Medellín - Colombia
+          </p>
+          <p>
+            <i class="bi bi-telephone-fill phone-icon"></i> +57 300 000 0000
+          </p>
+
+          <div class="social social-align">
+            <!--  <span class="icon-circle facebook-circle"><i class="bi bi-facebook"></i></span> -->
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="35"
+              height="35"
+              viewBox="0 0 16 16"
+            >
+              <circle cx="8" cy="8" r="8" fill="#56c18f"></circle>
+              <path
+                d="M10.5 5.5h-1.2c-.2 0-.3.1-.3.3v1h1.5l-.2 1.6H9v4.6H7.3V8.4H6V6.8h1.3V5.7c0-1.3.8-2.1 2-2.1h1.2v1.9z"
+                fill="#fff"
+                transform="scale(0.75) translate(2,2)"
+              />
+            </svg>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="35"
+              height="35"
+              viewBox="0 0 16 16"
+            >
+              <!-- Fondo circular verde -->
+              <circle cx="8" cy="8" r="8" fill="#56c18f"></circle>
+              <!-- Logo de Twitter en blanco -->
+              <path
+                d="M5 12c4.5 0 7-3.7 7-7v-.3A5 5 0 0 0 13 3a4.9 4.9 0 0 1-1.4.4A2.5 2.5 0 0 0 12.6 2a5 5 0 0 1-1.6.6A2.5 2.5 0 0 0 8 2a2.5 2.5 0 0 0-2.5 2.5c0 .2 0 .4.1.6A7.1 7.1 0 0 1 2 2.6a2.5 2.5 0 0 0 .8 3.3A2.4 2.4 0 0 1 2 5.6v.1a2.5 2.5 0 0 0 2 2.4 2.5 2.5 0 0 1-1.1.1 2.5 2.5 0 0 0 2.3 1.7A5 5 0 0 1 2 11a7 7 0 0 0 3 1z"
+                fill="#fff"
+                transform="scale(0.65) translate(5,6)"
+              />
+            </svg>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="35"
+              height="35"
+              viewBox="0 0 16 16"
+            >
+              <!-- Fondo circular verde -->
+              <circle cx="8" cy="8" r="8" fill="#56c18f"></circle>
+              <!-- Logo de WhatsApp en blanco -->
+              <path
+                d="M8 3a5 5 0 0 0-4.3 7.6L3 13l2.5-.7A5 5 0 1 0 8 3zm0 1.2a3.8 3.8 0 0 1 3.3 5.7l-.2.3.2.3c.1.2.1.4 0 .6-.2.5-.7 1.1-1.3 1.1-.2 0-.4 0-.6-.1l-.4-.2a6.7 6.7 0 0 1-2.9-2.9l-.2-.4c-.1-.2-.1-.4-.1-.6 0-.6.6-1.1 1.1-1.3.2-.1.4-.1.6 0l.3.2.3.2c.1.1.2.3.2.5 0 .2-.1.4-.2.6l-.2.3c.4.7 1 1.3 1.7 1.7l.3-.2c.2-.1.4-.2.6-.2.2 0 .4.1.5.2l.2.3.2.3c.1.2.1.4 0 .6-.2.5-.7 1.1-1.3 1.1A3.8 3.8 0 0 1 8 4.2z"
+                fill="#fff"
+                transform="scale(0.75) translate(2,2)"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <!-- FORM -->
+        <div class="col-md-8 d-flex justify-content-center">
+          <!-- Contenedor interno para limitar ancho -->
+          <div class="form-inner w-75">
+            <form [formGroup]="form" (ngSubmit)="submit()">
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <select class="form-select" formControlName="sexo">
+                    <option value="">Sexo *</option>
+                    <option>Masculino</option>
+                    <option>Femenino</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Fecha de nacimiento"
+                    onfocus="this.type = 'date'"
+                    formControlName="fechaNacimiento"
+                  />
+                </div>
+              </div>
+
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    placeholder="Nombre"
+                    formControlName="nombre"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    placeholder="Apellido"
+                    formControlName="apellido"
+                  />
+                </div>
+              </div>
+
+              <input
+                class="form-control mb-2"
+                placeholder="Email"
+                formControlName="email"
+              />
+              <input
+                class="form-control mb-2"
+                placeholder="Dirección"
+                formControlName="direccion"
+              />
+
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    placeholder="Casa / apartamento"
+                    formControlName="casa"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <select class="form-select" formControlName="pais">
+                    <option value="">País</option>
+                    <option>Colombia</option>
+                    <option>México</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <select class="form-select" formControlName="departamento">
+                    <option value="">Departamento</option>
+                    <option>Antioquia</option>
+                    <option>Cundinamarca</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <select class="form-select" formControlName="ciudad">
+                    <option value="">Ciudad</option>
+                    <option>Medellín</option>
+                    <option>Bogotá</option>
+                  </select>
+                </div>
+              </div>
+
+              <textarea
+                class="form-control mb-3"
+                placeholder="Comentarios"
+                formControlName="comentarios"
+              ></textarea>
+
+              <div class="text-end">
+                <button class="btn btn-custom px-5">Enviar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

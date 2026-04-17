@@ -1,0 +1,136 @@
+.bg-image {
+  background: url('/assets/playa.jpg') no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+}
+
+.overlay {
+  background: rgba(0,0,0,0.4);
+  height: 100%;
+}
+
+.form-container {
+  width: 800px;
+  border-radius: 10px;
+}
+
+.social i {
+  font-size: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+
+.form-inner {
+  margin-left: auto;   /* empuja hacia la derecha */
+  margin-right: 23px;     /* alinea desde el título hacia la derecha */
+}
+
+
+.col-md-4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centra vertical */
+  min-height: 100%;        /* asegura que ocupe toda la altura del cuadro */
+}
+
+.contact-block {
+  margin-top: -100px; /* ajusta este valor hasta que quede alineado con el input Nombre */
+}
+
+
+.custom-social {
+  padding: 0px 0;     /* agrega espacio interno arriba y abajo */
+  margin-top: 48px;    /* baja el bloque un poco más */
+  display: flex;
+  gap: 15px;           /* separa los íconos horizontalmente */
+  font-size: 1.2rem;   /* opcional: agrandar un poco los íconos */
+}
+
+
+.social-align {
+  display: flex;
+  justify-content: flex-start; /* mantiene alineación natural */
+  gap: -2px;                    /* separación mínima entre íconos */
+  margin-left: 40px;           /* empuja el bloque hacia la derecha */
+  margin-top: 25px;            /* baja un poco el bloque */
+  font-size: 1.4rem;           /* tamaño uniforme de íconos */
+}
+
+
+.contact-block p {
+  margin: 0 0 6px 0;        /* espacio reducido entre líneas */
+  color: #6c757d;           /* gris suave tipo “agua” */
+  font-size: 0.75rem;       /* tamaño mucho más pequeño */
+  white-space: nowrap;      /* fuerza que todo quede en una sola línea */
+  display: flex;
+  align-items: center;      /* ícono y texto alineados verticalmente */
+}
+
+.contact-block i {
+  margin-right: 5px;        /* espacio entre ícono y texto */
+  font-size: 0.85rem;       /* ícono pequeño */
+  color:#198754;
+      /* mismo tono gris */
+}
+
+
+
+.phone-icon {
+  transform: scaleX(-1);   /* voltea horizontalmente el ícono */
+  display: inline-block;   /* asegura que la transformación se aplique bien */
+  color: #198754;
+        /* verde */
+  font-size: 0.9rem;       /* tamaño pequeño */
+  margin-right: 6px;
+}
+
+
+
+/* iconos redes sociales  */
+
+
+.social-align {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 43px;
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+
+
+.icon-circle {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+
+/* iconos verdes */
+
+.text-custom {
+  color: #56c18f !important;
+}
+
+.btn-custom {
+  background-color: #56c18f !important;
+  color: #fff !important;
+}
+
+
+/* titulo */
+
+.form-title {
+  font-size: 2rem;              /* tamaño grande */
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-weight: 700;              /* negrita */
+  text-transform: uppercase;     /* mayúsculas */
+  color: #edf0ee;                /* tu verde personalizado */
+  letter-spacing: 1px;           /* separación ligera */
+}
