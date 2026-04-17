@@ -5,6 +5,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
 import { ContactRepository } from './app/domain/ports/contact.repository';
 import { ContactRepositoryImpl } from './app/infrastructure/repositories/contact.repository.impl';
+import { provideHttpClient } from '@angular/common/http';
 
 /* bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err)); */
@@ -13,6 +14,7 @@ import { ContactRepositoryImpl } from './app/infrastructure/repositories/contact
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
+    provideHttpClient(),
        {
       provide: ContactRepository,
       useClass: ContactRepositoryImpl

@@ -1,0 +1,41 @@
+<div class="container mt-5">
+  <h2 class="mb-4">Tabla de Contactos</h2>
+
+  <table class="table table-bordered table-striped">
+    <thead class="table-success">
+      <tr>
+        <th>ID</th>
+        <th>sexo</th>
+        <th>Fecha de Nacimiento</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Direccion</th>
+        <th>Ciudad</th>
+        <th>Departamento</th>
+        <th>País</th>
+        <th>Comentarios</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data">
+        <td>{{ item.id }}</td>
+        <td>{{ item.sexo }}</td>
+        <td>{{ item.fechaNacimiento }}</td>
+        <td>{{ item.nombre }}</td>
+        <td>{{ item.apellido }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.direccion }}</td>
+        <td>{{ item.ciudad }}</td>
+        <td>{{ item.departamento }}</td>
+        <td>{{ item.pais }}</td>
+        <td>{{ item.comentarios }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="text-end mt-3">
+  <button class="btn btn-secondary" (click)="volver()">
+    ← Volver al formulario
+  </button>
+</div>

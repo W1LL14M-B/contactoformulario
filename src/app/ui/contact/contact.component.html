@@ -1,16 +1,10 @@
 <div class="bg-image">
-
-
-  <!-- <div class="overlay d-flex justify-content-center align-items-center"> -->
-     <div class="overlay d-flex flex-column justify-content-center align-items-center">
-
+  <div
+    class="overlay d-flex flex-column justify-content-center align-items-center"
+  >
     <h3 class="form-title text-center mb-4">FORMULARIO DE CONTACTO</h3>
 
-
     <div class="card p-4 shadow form-container">
-
-
-      <!-- Título centrado -->
       <h3 class="text-center text-custom mb-4">Contacto</h3>
 
       <div class="row">
@@ -27,8 +21,6 @@
           </p>
 
           <div class="social social-align">
-            <!--  <span class="icon-circle facebook-circle"><i class="bi bi-facebook"></i></span> -->
-
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="35"
@@ -49,9 +41,8 @@
               height="35"
               viewBox="0 0 16 16"
             >
-              <!-- Fondo circular verde -->
               <circle cx="8" cy="8" r="8" fill="#56c18f"></circle>
-              <!-- Logo de Twitter en blanco -->
+
               <path
                 d="M5 12c4.5 0 7-3.7 7-7v-.3A5 5 0 0 0 13 3a4.9 4.9 0 0 1-1.4.4A2.5 2.5 0 0 0 12.6 2a5 5 0 0 1-1.6.6A2.5 2.5 0 0 0 8 2a2.5 2.5 0 0 0-2.5 2.5c0 .2 0 .4.1.6A7.1 7.1 0 0 1 2 2.6a2.5 2.5 0 0 0 .8 3.3A2.4 2.4 0 0 1 2 5.6v.1a2.5 2.5 0 0 0 2 2.4 2.5 2.5 0 0 1-1.1.1 2.5 2.5 0 0 0 2.3 1.7A5 5 0 0 1 2 11a7 7 0 0 0 3 1z"
                 fill="#fff"
@@ -65,9 +56,8 @@
               height="35"
               viewBox="0 0 16 16"
             >
-              <!-- Fondo circular verde -->
               <circle cx="8" cy="8" r="8" fill="#56c18f"></circle>
-              <!-- Logo de WhatsApp en blanco -->
+
               <path
                 d="M8 3a5 5 0 0 0-4.3 7.6L3 13l2.5-.7A5 5 0 1 0 8 3zm0 1.2a3.8 3.8 0 0 1 3.3 5.7l-.2.3.2.3c.1.2.1.4 0 .6-.2.5-.7 1.1-1.3 1.1-.2 0-.4 0-.6-.1l-.4-.2a6.7 6.7 0 0 1-2.9-2.9l-.2-.4c-.1-.2-.1-.4-.1-.6 0-.6.6-1.1 1.1-1.3.2-.1.4-.1.6 0l.3.2.3.2c.1.1.2.3.2.5 0 .2-.1.4-.2.6l-.2.3c.4.7 1 1.3 1.7 1.7l.3-.2c.2-.1.4-.2.6-.2.2 0 .4.1.5.2l.2.3.2.3c.1.2.1.4 0 .6-.2.5-.7 1.1-1.3 1.1A3.8 3.8 0 0 1 8 4.2z"
                 fill="#fff"
@@ -77,27 +67,59 @@
           </div>
         </div>
 
-        <!-- FORM -->
         <div class="col-md-8 d-flex justify-content-center">
-          <!-- Contenedor interno para limitar ancho -->
           <div class="form-inner w-75">
             <form [formGroup]="form" (ngSubmit)="submit()">
               <div class="row mb-2">
                 <div class="col-md-6">
                   <select class="form-select" formControlName="sexo">
-                    <option value="">Sexo *</option>
+                    <option value="" disabled selected>Sexo *</option>
                     <option>Masculino</option>
                     <option>Femenino</option>
                   </select>
+                  <div
+                    class="text-danger small"
+                    *ngIf="
+                      form.get('sexo')?.touched && form.get('sexo')?.invalid
+                    "
+                  >
+                    Obligatorio seleccionar campo
+                  </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 position-relative">
+                  <label
+                    *ngIf="!form.get('fechaNacimiento')?.value && !estaEnFoco"
+                    class="position-absolute pt-2 ps-3 text-muted"
+                    style="pointer-events: none; z-index: 10"
+                  >
+                    Fecha de nacimiento*
+                  </label>
+
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Fecha de nacimiento"
-                    onfocus="this.type = 'date'"
+                    (focus)="manejarFocus($event)"
+                    (blur)="manejarBlur($event)"
                     formControlName="fechaNacimiento"
                   />
+                  <div
+                    class="text-danger small"
+                    *ngIf="
+                      form.get('fechaNacimiento')?.touched &&
+                      form.get('fechaNacimiento')?.invalid
+                    "
+                  >
+                    La fecha de nacimiento es obligatoria
+                  </div>
+                  <div
+                    class="text-danger small"
+                    *ngIf="
+                      form.get('fechaNacimiento')?.touched &&
+                      form.get('fechaNacimiento')?.errors?.['menorEdad']
+                    "
+                  >
+                    Debes ser mayor de 18 años para registrarte
+                  </div>
                 </div>
               </div>
 
@@ -105,29 +127,74 @@
                 <div class="col-md-6">
                   <input
                     class="form-control"
-                    placeholder="Nombre"
+                    placeholder="Nombre *"
                     formControlName="nombre"
                   />
+                  <div
+                    class="text-danger small"
+                    *ngIf="
+                      form.get('nombre')?.touched && form.get('nombre')?.invalid
+                    "
+                  >
+                    El nombre es obligatorio
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <input
                     class="form-control"
-                    placeholder="Apellido"
+                    placeholder="Apellido *"
                     formControlName="apellido"
                   />
+                  <div
+                    class="text-danger small"
+                    *ngIf="
+                      form.get('apellido')?.touched &&
+                      form.get('apellido')?.invalid
+                    "
+                  >
+                    El apellido es obligatorio
+                  </div>
                 </div>
               </div>
 
               <input
                 class="form-control mb-2"
-                placeholder="Email"
+                placeholder="Email *"
                 formControlName="email"
               />
+              <div
+                class="text-danger small"
+                *ngIf="
+                  form.get('email')?.touched &&
+                  form.get('email')?.errors?.['required']
+                "
+              >
+                El email es obligatorio
+              </div>
+
+              <div
+                class="text-danger small"
+                *ngIf="
+                  form.get('email')?.touched &&
+                  form.get('email')?.errors?.['email']
+                "
+              >
+                Email inválido
+              </div>
               <input
                 class="form-control mb-2"
                 placeholder="Dirección"
                 formControlName="direccion"
               />
+              <div
+                class="text-danger small"
+                *ngIf="
+                  form.get('direccion')?.touched &&
+                  form.get('direccion')?.invalid
+                "
+              >
+                El dirección es obligatorio
+              </div>
 
               <div class="row mb-2">
                 <div class="col-md-6">
@@ -139,38 +206,85 @@
                 </div>
                 <div class="col-md-6">
                   <select class="form-select" formControlName="pais">
-                    <option value="">País</option>
+                    <option value="" disabled selected>País *</option>
                     <option>Colombia</option>
+                    <option>Argentina</option>
                     <option>México</option>
                   </select>
+                  <div
+                    class="text-danger small"
+                    *ngIf="
+                      form.get('pais')?.touched && form.get('pais')?.invalid
+                    "
+                  >
+                    Obligatorio seleccionar campo
+                  </div>
                 </div>
               </div>
 
               <div class="row mb-2">
-                <div class="col-md-6">
+                <div
+                  class="col-md-6"
+                  *ngIf="form.get('pais')?.value === 'Colombia'"
+                >
                   <select class="form-select" formControlName="departamento">
-                    <option value="">Departamento</option>
+                    <option value="" disabled>Departamento *</option>
                     <option>Antioquia</option>
                     <option>Cundinamarca</option>
+                    <option>Casanare</option>
                   </select>
+                  <div
+                    class="text-danger small"
+                    *ngIf="
+                      form.get('departamento')?.touched &&
+                      form.get('departamento')?.invalid
+                    "
+                  >
+                    El departamento es obligatorio
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <select class="form-select" formControlName="ciudad">
-                    <option value="">Ciudad</option>
+                    <option value="" disabled selected>Ciudad *</option>
                     <option>Medellín</option>
                     <option>Bogotá</option>
                   </select>
+                  <div
+                    class="text-danger small"
+                    *ngIf="
+                      form.get('ciudad')?.touched && form.get('ciudad')?.invalid
+                    "
+                  >
+                    Obligatorio seleccionar campo
+                  </div>
+                </div>
+              </div>
+              <div>
+                <textarea
+                  class="form-control mb-3"
+                  placeholder="Comentarios  *"
+                  formControlName="comentarios"
+                >
+                </textarea>
+                <div
+                  class="text-danger small"
+                  *ngIf="
+                    form.get('comentarios')?.touched &&
+                    form.get('comentarios')?.invalid
+                  "
+                >
+                  Los comentarios son obligatorios
                 </div>
               </div>
 
-              <textarea
-                class="form-control mb-3"
-                placeholder="Comentarios"
-                formControlName="comentarios"
-              ></textarea>
-
               <div class="text-end">
-                <button class="btn btn-custom px-5">Enviar</button>
+                <button
+                  class="btn btn-custom px-5"
+                  type="submit"
+                  [disabled]="form.invalid"
+                >
+                  Enviar
+                </button>
               </div>
             </form>
           </div>
