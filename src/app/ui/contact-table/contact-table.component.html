@@ -1,41 +1,198 @@
-<div class="container mt-5">
-  <h2 class="mb-4">Tabla de Contactos</h2>
+<div class="container-fluid mt-5 px-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Listado de Contactos (Unificado)</h2>
+    <button class="btn btn-secondary btn-sm" (click)="volver()">
+      ← Volver al formulario
+    </button>
+  </div>
 
-  <table class="table table-bordered table-striped">
-    <thead class="table-success">
-      <tr>
-        <th>ID</th>
-        <th>sexo</th>
-        <th>Fecha de Nacimiento</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Email</th>
-        <th>Direccion</th>
-        <th>Ciudad</th>
-        <th>Departamento</th>
-        <th>País</th>
-        <th>Comentarios</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of data">
-        <td>{{ item.id }}</td>
-        <td>{{ item.sexo }}</td>
-        <td>{{ item.fechaNacimiento }}</td>
-        <td>{{ item.nombre }}</td>
-        <td>{{ item.apellido }}</td>
-        <td>{{ item.email }}</td>
-        <td>{{ item.direccion }}</td>
-        <td>{{ item.ciudad }}</td>
-        <td>{{ item.departamento }}</td>
-        <td>{{ item.pais }}</td>
-        <td>{{ item.comentarios }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div class="text-end mt-3">
-  <button class="btn btn-secondary" (click)="volver()">
-    ← Volver al formulario
-  </button>
+  <div class="mb-3">
+    <div class="input-group">
+      <span class="input-group-text bg-white"
+        ><i class="bi bi-search"></i
+      ></span>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Filtrar por nombre, ciudad, departamento o comentarios..."
+        [(ngModel)]="searchTerm"
+        (input)="filter()"
+      />
+    </div>
+  </div>
+
+  <div class="table-responsive shadow-sm">
+    <table class="table table-hover table-bordered bg-white align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th (click)="sort('id')" style="cursor: pointer">ID ⇅</th>
+          <th (click)="sort('sexo')" style="cursor: pointer">Sexo ⇅</th>
+          <th (click)="sort('nombre')" style="cursor: pointer">Nombre ⇅</th>
+          <th (click)="sort('apellido')" style="cursor: pointer">Apellido ⇅</th>
+
+          <th (click)="sort('fechaNacimiento')" style="cursor: pointer">
+            Nacimiento ⇅
+          </th>
+          <th>Email</th>
+          <th>Dirección</th>
+          <th (click)="sort('pais')" style="cursor: pointer">pais ⇅</th>
+          <th (click)="sort('ciudad')" style="cursor: pointer">Ciudad ⇅</th>
+          <th (click)="sort('departamento')" style="cursor: pointer">Dpto ⇅</th>
+          <th>Comentarios</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of filteredData">
+          <td>
+            <span class="badge bg-light text-dark">{{
+              item.id || "Nuevo"
+            }}</span>
+          </td>
+           <td>{{ item.sexo }}</td>
+          <td>{{ item.nombre }}
+          <td>{{ item.apellido }}</td>
+          <td>{{ item.fechaNacimiento }}</td>
+          <td>
+            <small>{{ item.email }}</small>
+          </td>
+          <td>{{ item.direccion }}</td>
+              <td>{{ item.pais }}</td>
+          <td>{{ item.ciudad }}</td>
+          <td>{{ item.departamento }}</td>
+          <td
+            class="text-truncate"
+            style="max-width: 150px"
+            [title]="item.comentarios"
+          >
+            {{ item.comentarios }}
+          </td>
+          <td class="text-center">
+            <button
+              class="btn btn-warning btn-sm"
+              (click)="openEditModal(item)"
+            >
+              Editar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div
+    *ngIf="selectedItem"
+    class="modal fade show d-block"
+    style="background: rgba(0, 0, 0, 0.5); z-index: 1050"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-warning">
+          <h5 class="modal-title">
+            Editar Contacto: {{ selectedItem.nombre }}
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="selectedItem = null"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label font-weight-bold">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="selectedItem.nombre"
+              />
+            </div>
+            <div class="col-md-4">
+              <label class="form-label font-weight-bold">Apellido</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="selectedItem.apellido"
+              />
+            </div>
+            <div class="col-md-4">
+              <label class="form-label font-weight-bold">Sexo</label>
+              <select class="form-select" [(ngModel)]="selectedItem.sexo">
+                <option value="male">Masculino (male)</option>
+                <option value="female">Femenino (female)</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                [(ngModel)]="selectedItem.email"
+              />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Fecha de Nacimiento</label>
+              <input
+                type="date"
+                class="form-control"
+                [(ngModel)]="selectedItem.fechaNacimiento"
+              />
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Ciudad</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="selectedItem.ciudad"
+              />
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Departamento</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="selectedItem.departamento"
+              />
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">País</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="selectedItem.pais"
+              />
+            </div>
+            <div class="col-md-12">
+              <label class="form-label">Dirección</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="selectedItem.direccion"
+              />
+            </div>
+            <div class="col-md-12">
+              <label class="form-label">Comentarios</label>
+              <textarea
+                class="form-control"
+                rows="3"
+                [(ngModel)]="selectedItem.comentarios"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="selectedItem = null"
+          >
+            Cancelar
+          </button>
+          <button type="button" class="btn btn-primary" (click)="saveEdit()">
+            Guardar Cambios
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -126,9 +126,12 @@
               <div class="row mb-2">
                 <div class="col-md-6">
                   <input
+                  type="text"
                     class="form-control"
                     placeholder="Nombre *"
                     formControlName="nombre"
+                     (keydown)="blockNumbers($event)"
+
                   />
                   <div
                     class="text-danger small"
@@ -141,9 +144,11 @@
                 </div>
                 <div class="col-md-6">
                   <input
+                  type="text"
                     class="form-control"
                     placeholder="Apellido *"
                     formControlName="apellido"
+                    (keydown)="blockNumbers($event)"
                   />
                   <div
                     class="text-danger small"

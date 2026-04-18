@@ -70,97 +70,27 @@ export class ContactComponent {
     departamento: ['', Validators.required],
   });
 
-  /*  async submit() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
 
-    const value = this.form.getRawValue();
+  blockNumbers(event: KeyboardEvent) {
+  // Si la tecla es un número, se cancela
+  if (/[0-9]/.test(event.key)) {
+    event.preventDefault();
+  }
+}
 
-    await this.sendContact.execute(value);
 
-    // Navegar a tabla enviando datos
-    this.router.navigate(['/tabla'], {
-      state: { data: [value] },
-    });
-
-    this.form.reset();
-  } */
-
-  /*     async submit() {
+    async submit() {
   if (this.form.invalid) {
     this.form.markAllAsTouched();
     return;
   }
 
-  const value = this.form.getRawValue();
+  const formValue = this.form.getRawValue();
 
-  try {
-    // 👇 1. Ejecuta tu caso de uso (hexagonal)
-    await this.sendContact.execute(value);
+  this.router.navigate(['/tabla'], {
+    state: { nuevoContacto: formValue }
+  });
 
-    // 👇 2. Consumir API
-    this.contactService.getContacts().subscribe((data) => {
-
-      // 👇 3. Unificar datos (API + nuevo registro)
-      const nuevaData = [
-        ...data,
-        {
-          id: data.length + 1,
-          ...value
-        }
-      ];
-
-      // 👇 4. Navegar con toda la data
-      this.router.navigate(['/tabla'], {
-        state: { data: nuevaData }
-      });
-
-      this.form.reset();
-    });
-
-  } catch (error) {
-    console.error('Error al enviar contacto', error);
-  }
+  this.form.reset();
 }
- */
-
-  async submit() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-
-    const formValue = this.form.getRawValue();
-
-    this.contactService.getContacts().subscribe((apiData) => {
-      // 👇 Normalizar el dato del formulario (MISMA estructura que API)
-      const nuevoRegistro = {
-        id: apiData.length + 1,
-        sexo: formValue.sexo,
-        fechaNacimiento: formValue.fechaNacimiento,
-        nombre: formValue.nombre,
-        apellido: formValue.apellido,
-        email: formValue.email,
-        direccion: formValue.direccion,
-        ciudad: formValue.ciudad,
-        departamento: formValue.departamento,
-        pais: formValue.pais,
-        comentarios: formValue.comentarios,
-      };
-
-      // 👇 Unir API + formulario
-      const dataFinal = [...apiData, nuevoRegistro];
-
-      console.log('DATA FINAL:', dataFinal); // 👈 DEBUG
-
-      // 👇 navegar con TODO
-      this.router.navigate(['/tabla'], {
-        state: { data: dataFinal },
-      });
-
-      this.form.reset();
-    });
-  }
 }
